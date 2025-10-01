@@ -1,11 +1,19 @@
-[chipflow]
-project_name = "chipflow-examples-minimal"
+[design]
+name = "chipflow-design-1759331554198"
+description = "ChipFlow design generated from configurator"
 
-[chipflow.top]
-soc = "design.design:MySoC"
+[design.soc]
+class = "design:MySoC"
 
-[chipflow.silicon]
-process = "sky130"
-package = "openframe"
+[design.blocks]
+analog-bandgap = { enabled = true }
+analog-ldo = { enabled = true }
+analog-por = { enabled = true }
+digital-gpio = { enabled = true }
+digital-uart = { enabled = true }
+digital-cv32e40p = { enabled = true }
+digital-hyperram = { enabled = true }
+digital-socid = { enabled = true }
 
-
+[build]
+target = "sky130"
