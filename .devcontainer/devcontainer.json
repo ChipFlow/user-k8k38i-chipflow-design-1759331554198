@@ -1,0 +1,55 @@
+{
+  "name": "ChipFlow Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+  
+  // Features to install
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
+  },
+
+  // Configure tool-specific properties
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.analysis.typeCheckingMode": "off",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": false,
+        "python.linting.flake8Enabled": true,
+        "python.formatting.provider": "black",
+        "files.associations": {
+          "*.toml": "toml",
+          "*.py": "python"
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.flake8",
+        "ms-python.black-formatter",
+        "ms-vscode.vscode-json",
+        "tamasfe.even-better-toml",
+        "ms-vscode.vscode-yaml",
+        "GitHub.vscode-github-actions",
+        "GitHub.copilot",
+        "charliermarsh.ruff"
+      ]
+    }
+  },
+
+  // Use 'forwardPorts' to expose ports locally
+  "forwardPorts": [8000, 8080, 3000],
+
+  // Use 'postCreateCommand' to run commands after the container is created
+  "postCreateCommand": ".devcontainer/post-create.sh",
+
+  // Use 'postStartCommand' to run commands after the container starts
+  "postStartCommand": "echo 'ChipFlow development environment is ready!'",
+
+  // Set container user
+  "remoteUser": "vscode"
+}
