@@ -1,0 +1,1434 @@
+{
+  "metadata": {
+    "generatedBy": "ChipFlow Configurator",
+    "version": "1.0.0",
+    "timestamp": "2025-10-01T15:12:34.198Z",
+    "activeConfigId": "openframe"
+  },
+  "chipSpecs": {
+    "totalPins": 64,
+    "pinsPerSide": 16,
+    "packageType": "Openframe",
+    "gridSize": {
+      "cols": 32,
+      "rows": 32
+    },
+    "aspectRatio": "1:1"
+  },
+  "config": {
+    "templateInfo": {
+      "name": "ChipFoundry OpenFrame",
+      "version": "1.0.0",
+      "description": "OpenFrame configuration with analog shell and common digital IP.",
+      "supplier": "ChipFoundry",
+      "created": "2025-09-13",
+      "lastModified": "2025-09-13"
+    },
+    "chipSpecs": {
+      "totalPins": 64,
+      "pinsPerSide": 16,
+      "packageType": "Openframe",
+      "gridSize": {
+        "cols": 32,
+        "rows": 32
+      },
+      "aspectRatio": "1:1"
+    },
+    "powerPins": [
+      {
+        "name": "VDD",
+        "type": "power",
+        "voltage": "3.3V",
+        "description": "Digital core supply",
+        "positions": [
+          {
+            "side": "top",
+            "index": 0
+          },
+          {
+            "side": "right",
+            "index": 0
+          },
+          {
+            "side": "bottom",
+            "index": 14
+          },
+          {
+            "side": "left",
+            "index": 14
+          }
+        ]
+      },
+      {
+        "name": "VSS",
+        "type": "power",
+        "voltage": "0V",
+        "description": "Digital ground",
+        "positions": [
+          {
+            "side": "top",
+            "index": 1
+          },
+          {
+            "side": "right",
+            "index": 1
+          },
+          {
+            "side": "bottom",
+            "index": 15
+          },
+          {
+            "side": "left",
+            "index": 15
+          }
+        ]
+      },
+      {
+        "name": "AVDD",
+        "type": "power",
+        "voltage": "3.3V",
+        "description": "Analog supply",
+        "positions": [
+          {
+            "side": "top",
+            "index": 2
+          },
+          {
+            "side": "right",
+            "index": 2
+          }
+        ]
+      },
+      {
+        "name": "AVSS",
+        "type": "power",
+        "voltage": "0V",
+        "description": "Analog ground",
+        "positions": [
+          {
+            "side": "top",
+            "index": 3
+          },
+          {
+            "side": "right",
+            "index": 3
+          }
+        ]
+      }
+    ],
+    "busDefinitions": [
+      {
+        "name": "WB",
+        "fullName": "Wishbone Bus",
+        "color": "#ef4444",
+        "description": "High-speed data bus"
+      },
+      {
+        "name": "CSR",
+        "fullName": "Control/Status Register Bus",
+        "color": "#3b82f6",
+        "description": "Register access bus"
+      },
+      {
+        "name": "Clock",
+        "fullName": "Clock Domain",
+        "color": "#f59e0b",
+        "description": "Clocks"
+      },
+      {
+        "name": "Power",
+        "fullName": "Power Domain",
+        "color": "#10b981",
+        "description": "Power rails"
+      },
+      {
+        "name": "Analog",
+        "fullName": "Analog Nets",
+        "color": "#8b5cf6",
+        "description": "Analog connections"
+      }
+    ],
+    "pinAllocationRules": {
+      "powerPinDistribution": {
+        "strategy": "analog_optimized",
+        "pairVddVss": true,
+        "separateAnalogDigital": true
+      }
+    },
+    "layoutConstraints": {
+      "analogShell": {
+        "enabled": true,
+        "shellWidth": 1,
+        "description": "Thin analog shell around perimeter",
+        "blockSpacing": 1,
+        "preferredBlockOrientation": "perimeter"
+      },
+      "analogBlockSizing": {
+        "defaultWidth": 2,
+        "defaultHeight": 2,
+        "maxWidth": 4,
+        "maxHeight": 3,
+        "orientationRules": {
+          "top": {
+            "preferredWidth": 3,
+            "preferredHeight": 2,
+            "allowRotation": true
+          },
+          "right": {
+            "preferredWidth": 2,
+            "preferredHeight": 3,
+            "allowRotation": true
+          },
+          "bottom": {
+            "preferredWidth": 3,
+            "preferredHeight": 2,
+            "allowRotation": true
+          },
+          "left": {
+            "preferredWidth": 2,
+            "preferredHeight": 3,
+            "allowRotation": true
+          }
+        }
+      },
+      "digitalCore": {
+        "enabled": true,
+        "coreMargin": 2,
+        "description": "Digital blocks positioned in inner core"
+      }
+    },
+    "analogBlocks": [
+      {
+        "id": "dac",
+        "name": "DAC",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "High",
+        "defaultEnabled": true,
+        "gridSize": {
+          "width": 3,
+          "height": 2
+        },
+        "positioning": {
+          "preferredSide": "left",
+          "allowedSides": [
+            "top",
+            "left",
+            "right",
+            "bottom"
+          ],
+          "orientationPreference": "horizontal"
+        },
+        "buses": [
+          {
+            "name": "CSR",
+            "type": "primary"
+          },
+          {
+            "name": "Analog",
+            "type": "secondary"
+          }
+        ],
+        "pins": [
+          {
+            "name": "dac_out0",
+            "direction": "output",
+            "type": "analog",
+            "optional": false,
+            "description": "Analog out ch0"
+          },
+          {
+            "name": "dac_out1",
+            "direction": "output",
+            "type": "analog",
+            "optional": true,
+            "description": "Analog out ch1"
+          },
+          {
+            "name": "dac_vref",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Reference"
+          },
+          {
+            "name": "dac_vdd",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Supply"
+          },
+          {
+            "name": "dac_vss",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Ground"
+          }
+        ]
+      },
+      {
+        "id": "bandgap",
+        "name": "Bandgap",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "High",
+        "permanentlyEnabled": true,
+        "defaultEnabled": true,
+        "gridSize": {
+          "width": 2,
+          "height": 2
+        },
+        "positioning": {
+          "preferredSide": "top",
+          "allowedSides": [
+            "top",
+            "left",
+            "right",
+            "bottom"
+          ],
+          "orientationPreference": "square"
+        },
+        "buses": [
+          {
+            "name": "Power",
+            "type": "primary"
+          }
+        ],
+        "pins": [
+          {
+            "name": "bg_vref",
+            "direction": "output",
+            "type": "analog",
+            "optional": false,
+            "description": "Reference"
+          },
+          {
+            "name": "bg_vdd",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Supply"
+          },
+          {
+            "name": "bg_trim",
+            "direction": "input",
+            "type": "analog",
+            "optional": true,
+            "description": "Trim"
+          }
+        ]
+      },
+      {
+        "id": "ldo",
+        "name": "LDO",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "High",
+        "permanentlyEnabled": true,
+        "defaultEnabled": true,
+        "gridSize": {
+          "width": 2,
+          "height": 3
+        },
+        "positioning": {
+          "preferredSide": "right",
+          "allowedSides": [
+            "top",
+            "left",
+            "right",
+            "bottom"
+          ],
+          "orientationPreference": "vertical"
+        },
+        "buses": [
+          {
+            "name": "Power",
+            "type": "primary"
+          }
+        ],
+        "pins": [
+          {
+            "name": "ldo_vin",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Input"
+          },
+          {
+            "name": "ldo_vout",
+            "direction": "output",
+            "type": "power",
+            "optional": false,
+            "description": "Regulated output"
+          },
+          {
+            "name": "ldo_en",
+            "direction": "input",
+            "type": "analog",
+            "optional": true,
+            "description": "Enable"
+          },
+          {
+            "name": "ldo_pg",
+            "direction": "output",
+            "type": "analog",
+            "optional": true,
+            "description": "Power good"
+          }
+        ]
+      },
+      {
+        "id": "por",
+        "name": "POR",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "High",
+        "permanentlyEnabled": true,
+        "defaultEnabled": true,
+        "gridSize": {
+          "width": 2,
+          "height": 2
+        },
+        "positioning": {
+          "preferredSide": "bottom",
+          "allowedSides": [
+            "top",
+            "left",
+            "right",
+            "bottom"
+          ],
+          "orientationPreference": "square"
+        },
+        "buses": [
+          {
+            "name": "Power",
+            "type": "primary"
+          },
+          {
+            "name": "CSR",
+            "type": "secondary"
+          }
+        ],
+        "pins": [
+          {
+            "name": "por_vdd",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Monitor"
+          },
+          {
+            "name": "por_reset",
+            "direction": "output",
+            "type": "digital",
+            "optional": false,
+            "description": "Reset out"
+          },
+          {
+            "name": "por_thresh",
+            "direction": "input",
+            "type": "analog",
+            "optional": true,
+            "description": "Threshold"
+          }
+        ]
+      },
+      {
+        "id": "pll-se",
+        "name": "PLL",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "High",
+        "defaultEnabled": true,
+        "gridSize": {
+          "width": 3,
+          "height": 2
+        },
+        "positioning": {
+          "preferredSide": "top",
+          "allowedSides": [
+            "top",
+            "left",
+            "right",
+            "bottom"
+          ],
+          "orientationPreference": "horizontal"
+        },
+        "buses": [
+          {
+            "name": "Clock",
+            "type": "primary"
+          },
+          {
+            "name": "Power",
+            "type": "secondary"
+          }
+        ],
+        "pins": [
+          {
+            "name": "pll_clk_in",
+            "direction": "input",
+            "type": "analog",
+            "optional": false,
+            "description": "CLK in"
+          },
+          {
+            "name": "pll_clk_out",
+            "direction": "output",
+            "type": "digital",
+            "optional": false,
+            "description": "CLK out"
+          },
+          {
+            "name": "pll_lock",
+            "direction": "output",
+            "type": "digital",
+            "optional": true,
+            "description": "Lock"
+          },
+          {
+            "name": "pll_vdd",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Supply"
+          },
+          {
+            "name": "pll_vss",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Ground"
+          }
+        ]
+      },
+      {
+        "id": "adc",
+        "name": "ADC",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Medium",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 2,
+          "height": 3
+        },
+        "positioning": {
+          "preferredSide": "right",
+          "allowedSides": [
+            "top",
+            "left",
+            "right",
+            "bottom"
+          ],
+          "orientationPreference": "vertical"
+        },
+        "buses": [
+          {
+            "name": "CSR",
+            "type": "primary"
+          },
+          {
+            "name": "Analog",
+            "type": "secondary"
+          }
+        ],
+        "pins": [
+          {
+            "name": "adc_in0",
+            "direction": "input",
+            "type": "analog",
+            "optional": false,
+            "description": "Analog in ch0"
+          },
+          {
+            "name": "adc_in1",
+            "direction": "input",
+            "type": "analog",
+            "optional": true,
+            "description": "Analog in ch1"
+          },
+          {
+            "name": "adc_vref",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Reference"
+          },
+          {
+            "name": "adc_vdd",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Supply"
+          },
+          {
+            "name": "adc_vss",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Ground"
+          }
+        ]
+      },
+      {
+        "id": "temp-sensor",
+        "name": "Temp Sensor",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Low",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 2,
+          "height": 2
+        },
+        "positioning": {
+          "preferredSide": "bottom",
+          "allowedSides": [
+            "top",
+            "left",
+            "right",
+            "bottom"
+          ],
+          "orientationPreference": "square"
+        },
+        "buses": [
+          {
+            "name": "CSR",
+            "type": "primary"
+          },
+          {
+            "name": "Analog",
+            "type": "secondary"
+          }
+        ],
+        "pins": [
+          {
+            "name": "temp_out",
+            "direction": "output",
+            "type": "analog",
+            "optional": false,
+            "description": "Temperature"
+          },
+          {
+            "name": "temp_vdd",
+            "direction": "input",
+            "type": "power",
+            "optional": false,
+            "description": "Supply"
+          },
+          {
+            "name": "temp_en",
+            "direction": "input",
+            "type": "digital",
+            "optional": true,
+            "description": "Enable"
+          }
+        ]
+      }
+    ],
+    "digitalBlocks": [
+      {
+        "id": "gpio",
+        "name": "GPIO",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Medium",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 2,
+          "height": 2
+        },
+        "scalable": {
+          "enabled": true,
+          "parameter": "count",
+          "min": 1,
+          "max": 4,
+          "default": 1,
+          "step": 1
+        },
+        "bitSizing": {
+          "enabled": true,
+          "parameter": "bits",
+          "min": 8,
+          "max": 64,
+          "default": 32,
+          "step": 8,
+          "options": [
+            8,
+            16,
+            32,
+            64
+          ]
+        },
+        "buses": [
+          {
+            "name": "WB",
+            "type": "primary"
+          }
+        ],
+        "externalInterface": {
+          "name": "GPIO",
+          "pinTemplate": "GPIO{n}",
+          "pinCount": 32
+        },
+        "features": [
+          "input",
+          "output",
+          "interrupts"
+        ]
+      },
+      {
+        "id": "uart",
+        "name": "UART",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Medium",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 2,
+          "height": 2
+        },
+        "scalable": {
+          "enabled": true,
+          "parameter": "count",
+          "min": 1,
+          "max": 4,
+          "default": 1,
+          "step": 1
+        },
+        "buses": [
+          {
+            "name": "CSR",
+            "type": "primary"
+          },
+          {
+            "name": "WB",
+            "type": "secondary"
+          }
+        ],
+        "externalInterface": {
+          "name": "UART",
+          "pins": [
+            {
+              "name": "TX",
+              "direction": "output",
+              "description": "Transmit"
+            },
+            {
+              "name": "RX",
+              "direction": "input",
+              "description": "Receive"
+            },
+            {
+              "name": "RTS",
+              "direction": "output",
+              "description": "Ready"
+            },
+            {
+              "name": "CTS",
+              "direction": "input",
+              "description": "Clear"
+            }
+          ]
+        },
+        "features": [
+          "baud",
+          "parity",
+          "flow control"
+        ]
+      },
+      {
+        "id": "spi",
+        "name": "SPI",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Medium",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 2,
+          "height": 2
+        },
+        "scalable": {
+          "enabled": true,
+          "parameter": "count",
+          "min": 1,
+          "max": 3,
+          "default": 1,
+          "step": 1
+        },
+        "buses": [
+          {
+            "name": "CSR",
+            "type": "primary"
+          },
+          {
+            "name": "WB",
+            "type": "secondary"
+          }
+        ],
+        "externalInterface": {
+          "name": "SPI",
+          "pins": [
+            {
+              "name": "SCLK",
+              "direction": "output",
+              "description": "Clock"
+            },
+            {
+              "name": "MOSI",
+              "direction": "output",
+              "description": "Master out"
+            },
+            {
+              "name": "MISO",
+              "direction": "input",
+              "description": "Master in"
+            },
+            {
+              "name": "CS",
+              "direction": "output",
+              "description": "Chip select"
+            }
+          ]
+        },
+        "features": [
+          "mode0-3",
+          "cs"
+        ]
+      },
+      {
+        "id": "i2c",
+        "name": "I2C",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Medium",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 2,
+          "height": 2
+        },
+        "scalable": {
+          "enabled": true,
+          "parameter": "count",
+          "min": 1,
+          "max": 2,
+          "default": 1,
+          "step": 1
+        },
+        "buses": [
+          {
+            "name": "CSR",
+            "type": "primary"
+          },
+          {
+            "name": "WB",
+            "type": "secondary"
+          }
+        ],
+        "externalInterface": {
+          "name": "I2C",
+          "pins": [
+            {
+              "name": "SDA",
+              "direction": "bidirectional",
+              "description": "Data"
+            },
+            {
+              "name": "SCL",
+              "direction": "output",
+              "description": "Clock"
+            }
+          ]
+        },
+        "features": [
+          "standard",
+          "fast"
+        ]
+      },
+      {
+        "id": "sram",
+        "name": "SRAM",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "High",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 7,
+          "height": 6
+        },
+        "scalable": {
+          "enabled": true,
+          "parameter": "size_kb",
+          "options": [
+            32,
+            64,
+            128,
+            256,
+            512
+          ],
+          "default": 32
+        },
+        "buses": [
+          {
+            "name": "WB",
+            "type": "primary"
+          }
+        ],
+        "features": [
+          "single-port"
+        ]
+      },
+      {
+        "id": "cv32e40p",
+        "name": "CV32E40P RISC-V",
+        "supplier": "OpenHW Group",
+        "category": "core",
+        "priority": "High",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 10,
+          "height": 8
+        },
+        "buses": [
+          {
+            "name": "WB",
+            "type": "primary"
+          },
+          {
+            "name": "CSR",
+            "type": "secondary"
+          }
+        ],
+        "externalInterface": {
+          "name": "Debug",
+          "pins": [
+            {
+              "name": "jtag_tck",
+              "direction": "input",
+              "description": "JTAG Clock"
+            },
+            {
+              "name": "jtag_tms",
+              "direction": "input",
+              "description": "JTAG Mode Select"
+            },
+            {
+              "name": "jtag_tdi",
+              "direction": "input",
+              "description": "JTAG Data In"
+            },
+            {
+              "name": "jtag_tdo",
+              "direction": "output",
+              "description": "JTAG Data Out"
+            },
+            {
+              "name": "jtag_trst",
+              "direction": "input",
+              "description": "JTAG Reset"
+            }
+          ]
+        },
+        "features": [
+          "risc-v",
+          "rv32imc",
+          "debug",
+          "interrupts"
+        ]
+      },
+      {
+        "id": "minerva",
+        "name": "Minerva RISC-V",
+        "supplier": "LambdaConcept",
+        "category": "core",
+        "priority": "High",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 6,
+          "height": 5
+        },
+        "buses": [
+          {
+            "name": "WB",
+            "type": "primary"
+          }
+        ],
+        "externalInterface": {
+          "name": "Debug",
+          "pins": [
+            {
+              "name": "jtag_tck",
+              "direction": "input",
+              "description": "JTAG Clock"
+            },
+            {
+              "name": "jtag_tms",
+              "direction": "input",
+              "description": "JTAG Mode Select"
+            },
+            {
+              "name": "jtag_tdi",
+              "direction": "input",
+              "description": "JTAG Data In"
+            },
+            {
+              "name": "jtag_tdo",
+              "direction": "output",
+              "description": "JTAG Data Out"
+            }
+          ]
+        },
+        "features": [
+          "risc-v",
+          "rv32i",
+          "debug",
+          "small",
+          "open-source"
+        ]
+      },
+      {
+        "id": "qspi-flash",
+        "name": "QSPI Flash",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Medium",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 4,
+          "height": 3
+        },
+        "scalable": {
+          "enabled": true,
+          "parameter": "count",
+          "min": 1,
+          "max": 4,
+          "default": 1,
+          "step": 1
+        },
+        "sizing": {
+          "enabled": true,
+          "parameter": "size_mb",
+          "options": [
+            4,
+            8,
+            16,
+            32,
+            64
+          ],
+          "default": 16
+        },
+        "buses": [
+          {
+            "name": "WB",
+            "type": "primary"
+          },
+          {
+            "name": "CSR",
+            "type": "secondary"
+          }
+        ],
+        "externalInterface": {
+          "name": "QSPI",
+          "pins": [
+            {
+              "name": "sck",
+              "direction": "output",
+              "description": "Serial Clock"
+            },
+            {
+              "name": "cs_n",
+              "direction": "output",
+              "description": "Chip Select"
+            },
+            {
+              "name": "dq0",
+              "direction": "bidirectional",
+              "description": "Data 0 / MOSI"
+            },
+            {
+              "name": "dq1",
+              "direction": "bidirectional",
+              "description": "Data 1 / MISO"
+            },
+            {
+              "name": "dq2",
+              "direction": "bidirectional",
+              "description": "Data 2 / WP"
+            },
+            {
+              "name": "dq3",
+              "direction": "bidirectional",
+              "description": "Data 3 / HOLD"
+            }
+          ]
+        },
+        "features": [
+          "quad-spi",
+          "fast-read",
+          "xip"
+        ]
+      },
+      {
+        "id": "hyperram",
+        "name": "HyperRAM",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Low",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 5,
+          "height": 4
+        },
+        "scalable": {
+          "enabled": true,
+          "parameter": "count",
+          "min": 1,
+          "max": 4,
+          "default": 1,
+          "step": 1
+        },
+        "sizing": {
+          "enabled": true,
+          "parameter": "size_mb",
+          "options": [
+            8,
+            16,
+            32,
+            64
+          ],
+          "default": 16
+        },
+        "buses": [
+          {
+            "name": "WB",
+            "type": "primary"
+          }
+        ],
+        "externalInterface": {
+          "name": "HyperBus",
+          "pins": [
+            {
+              "name": "clk",
+              "direction": "output",
+              "description": "Differential Clock+"
+            },
+            {
+              "name": "clk_n",
+              "direction": "output",
+              "description": "Differential Clock-"
+            },
+            {
+              "name": "dq0",
+              "direction": "bidirectional",
+              "description": "Data 0"
+            },
+            {
+              "name": "dq1",
+              "direction": "bidirectional",
+              "description": "Data 1"
+            },
+            {
+              "name": "dq2",
+              "direction": "bidirectional",
+              "description": "Data 2"
+            },
+            {
+              "name": "dq3",
+              "direction": "bidirectional",
+              "description": "Data 3"
+            },
+            {
+              "name": "dq4",
+              "direction": "bidirectional",
+              "description": "Data 4"
+            },
+            {
+              "name": "dq5",
+              "direction": "bidirectional",
+              "description": "Data 5"
+            },
+            {
+              "name": "dq6",
+              "direction": "bidirectional",
+              "description": "Data 6"
+            },
+            {
+              "name": "dq7",
+              "direction": "bidirectional",
+              "description": "Data 7"
+            },
+            {
+              "name": "rwds",
+              "direction": "bidirectional",
+              "description": "Read/Write Data Strobe"
+            },
+            {
+              "name": "cs_n",
+              "direction": "output",
+              "description": "Chip Select"
+            },
+            {
+              "name": "reset_n",
+              "direction": "output",
+              "description": "Reset"
+            }
+          ]
+        },
+        "features": [
+          "high-speed",
+          "low-latency",
+          "burst"
+        ]
+      },
+      {
+        "id": "gptimer",
+        "name": "GP Timer",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Medium",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 2,
+          "height": 2
+        },
+        "scalable": {
+          "enabled": true,
+          "parameter": "count",
+          "min": 1,
+          "max": 4,
+          "default": 1,
+          "step": 1
+        },
+        "buses": [
+          {
+            "name": "CSR",
+            "type": "primary"
+          }
+        ],
+        "features": [
+          "32-bit",
+          "prescaler",
+          "compare",
+          "auto-reload",
+          "interrupt"
+        ]
+      },
+      {
+        "id": "socid",
+        "name": "SoC ID",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Low",
+        "defaultEnabled": true,
+        "permanentlyEnabled": true,
+        "gridSize": {
+          "width": 1,
+          "height": 1
+        },
+        "buses": [
+          {
+            "name": "CSR",
+            "type": "primary"
+          }
+        ],
+        "features": [
+          "read-only",
+          "version",
+          "build-id"
+        ]
+      },
+      {
+        "id": "platform-timer",
+        "name": "Platform Timer",
+        "supplier": "ChipFoundry",
+        "category": "core",
+        "priority": "Medium",
+        "defaultEnabled": false,
+        "gridSize": {
+          "width": 3,
+          "height": 2
+        },
+        "buses": [
+          {
+            "name": "CSR",
+            "type": "primary"
+          }
+        ],
+        "features": [
+          "64-bit",
+          "real-time",
+          "compare",
+          "interrupt"
+        ]
+      }
+    ]
+  },
+  "enabledBlocks": [
+    {
+      "id": "analog-bandgap",
+      "name": "Bandgap",
+      "supplier": "ChipFoundry",
+      "type": "analog",
+      "category": "core",
+      "priority": "High",
+      "enabled": true,
+      "permanentlyEnabled": true,
+      "gridX": 1,
+      "gridY": 0,
+      "gridWidth": 3,
+      "gridHeight": 1,
+      "x": 23.5,
+      "y": 0,
+      "bus1": "Power",
+      "side": "top"
+    },
+    {
+      "id": "analog-ldo",
+      "name": "LDO",
+      "supplier": "ChipFoundry",
+      "type": "analog",
+      "category": "core",
+      "priority": "High",
+      "enabled": true,
+      "permanentlyEnabled": true,
+      "gridX": 31,
+      "gridY": 1,
+      "gridWidth": 1,
+      "gridHeight": 3,
+      "x": 728.5,
+      "y": 23.5,
+      "bus1": "Power",
+      "side": "right"
+    },
+    {
+      "id": "analog-por",
+      "name": "POR",
+      "supplier": "ChipFoundry",
+      "type": "analog",
+      "category": "core",
+      "priority": "High",
+      "enabled": true,
+      "permanentlyEnabled": true,
+      "gridX": 1,
+      "gridY": 31,
+      "gridWidth": 3,
+      "gridHeight": 1,
+      "x": 23.5,
+      "y": 728.5,
+      "bus1": "Power",
+      "bus2": "CSR",
+      "side": "bottom"
+    },
+    {
+      "id": "digital-gpio",
+      "name": "GPIO",
+      "supplier": "ChipFoundry",
+      "type": "digital",
+      "category": "core",
+      "priority": "Medium",
+      "enabled": true,
+      "permanentlyEnabled": false,
+      "gridX": 6,
+      "gridY": 2,
+      "gridWidth": 2,
+      "gridHeight": 2,
+      "x": 141,
+      "y": 47,
+      "bus1": "WB",
+      "externalPins": "GPIO",
+      "count": 1,
+      "maxCount": 4,
+      "bitSize": 32,
+      "maxBitSize": 64,
+      "baseId": "gpio"
+    },
+    {
+      "id": "digital-uart",
+      "name": "UART",
+      "supplier": "ChipFoundry",
+      "type": "digital",
+      "category": "core",
+      "priority": "Medium",
+      "enabled": true,
+      "permanentlyEnabled": false,
+      "gridX": 4,
+      "gridY": 2,
+      "gridWidth": 2,
+      "gridHeight": 2,
+      "x": 94,
+      "y": 47,
+      "bus1": "CSR",
+      "bus2": "WB",
+      "externalPins": "UART",
+      "count": 1,
+      "maxCount": 4,
+      "baseId": "uart"
+    },
+    {
+      "id": "digital-cv32e40p",
+      "name": "CV32E40P RISC-V",
+      "supplier": "OpenHW Group",
+      "type": "digital",
+      "category": "core",
+      "priority": "High",
+      "enabled": true,
+      "permanentlyEnabled": false,
+      "gridX": 8,
+      "gridY": 2,
+      "gridWidth": 10,
+      "gridHeight": 8,
+      "x": 188,
+      "y": 47,
+      "bus1": "WB",
+      "bus2": "CSR",
+      "externalPins": "Debug",
+      "count": 1,
+      "maxCount": 1
+    },
+    {
+      "id": "digital-hyperram",
+      "name": "HyperRAM",
+      "supplier": "ChipFoundry",
+      "type": "digital",
+      "category": "core",
+      "priority": "Low",
+      "enabled": true,
+      "permanentlyEnabled": false,
+      "gridX": 18,
+      "gridY": 2,
+      "gridWidth": 5,
+      "gridHeight": 4,
+      "x": 423,
+      "y": 47,
+      "bus1": "WB",
+      "externalPins": "HyperBus",
+      "count": 1,
+      "maxCount": 4,
+      "size": 16,
+      "baseId": "hyperram"
+    },
+    {
+      "id": "digital-socid",
+      "name": "SoC ID",
+      "supplier": "ChipFoundry",
+      "type": "digital",
+      "category": "core",
+      "priority": "Low",
+      "enabled": true,
+      "permanentlyEnabled": false,
+      "gridX": 3,
+      "gridY": 3,
+      "gridWidth": 1,
+      "gridHeight": 1,
+      "x": 70.5,
+      "y": 70.5,
+      "bus1": "CSR",
+      "count": 1,
+      "maxCount": 1
+    }
+  ],
+  "timestamp": "2025-10-01T15:12:34.198Z",
+  "activeConfigId": "openframe"
+}
